@@ -1,5 +1,6 @@
 package edu.leon.controller;
 
+import edu.leon.model.Vacante;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,20 +12,28 @@ import java.util.List;
 
 @Controller
 public class HomeController {
+    @GetMapping("/detalle")
+    public String mostrarDetalle(Model model) {
+        Vacante vacante = new Vacante(0, "Ingeniero de Comunicaciones", "Se solicita Ing. para dar soporte a intranet", LocalDateTime.now(), 9700.0);
+        model.addAttribute("vacante", vacante);
+        return "detalle";
+    }
+
     @GetMapping("/listado")
-    public String mostrarListado(Model model){
+    public String mostrarListado(Model model) {
         List<String> lista = new LinkedList<>();
         lista.add("Ingeniero de Sistemas");
         lista.add("Auxiliar de Contabilidad");
         lista.add("Vendedor");
         lista.add("Arquitecto");
 
-        model.addAttribute("empleos",lista);
+        model.addAttribute("empleos", lista);
 
         return "listado";
     }
+
     @GetMapping("/")
-    public String mostrartHome(Model model){
+    public String mostrartHome(Model model) {
 //        model.addAttribute("mensaje","Bienvenidos a Empleos App");
 //        model.addAttribute("fecha", LocalDateTime.now());
         String nombre = "Auxiliar de Contabilidad";

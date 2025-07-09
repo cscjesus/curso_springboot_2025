@@ -6,15 +6,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
 
 @Controller
 public class HomeController {
+
+    @GetMapping("/tabla")
+    public String mostrarTabla(Model model){
+        List<Vacante> lista = getVacantes();
+        model.addAttribute("vacantes",lista);
+        return "tabla";
+    }
+
     @GetMapping("/detalle")
     public String mostrarDetalle(Model model) {
-        Vacante vacante = new Vacante(0, "Ingeniero de Comunicaciones", "Se solicita Ing. para dar soporte a intranet", LocalDateTime.now(), 9700.0);
+        Vacante vacante = new Vacante(0, "Ingeniero de Comunicaciones", "Se solicita Ing. para dar soporte a intranet", LocalDate.now(), 9700.0);
         model.addAttribute("vacante", vacante);
         return "detalle";
     }
@@ -45,6 +53,29 @@ public class HomeController {
         model.addAttribute("salario", salario);
         model.addAttribute("vigente", vigente);
         return "home";
-        //seccion 2 video 9
+        //seccion 2 video 11
+    }
+
+    /**
+     * Metodo que regrsa una lista de objetos de tipo Vacante
+     * @return
+     */
+    private List<Vacante> getVacantes() {
+        List<Vacante> vacantes = new LinkedList<>();
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        var vacante1 = new Vacante(1,"Ingeniero Civil","Se solicita Ing. Civil para " +
+                "disenar puente peatonal",LocalDate.parse("08-02-2019",df),8500.0);
+        vacantes.add(vacante1);
+
+        vacante1 = new Vacante(2,"Contador Publico","Empresa importante solicita contandor con 5 anios de experiencia titulado",LocalDate.parse("09-02-2019",df),12000.0);
+        vacantes.add(vacante1);
+
+        vacante1 = new Vacante(3,"Ingeniero Electrico","Empresa internacional solicita Ingeniero Electrico para mantenimiento de instalacion electrica",LocalDate.parse("10-02-2019",df),10500.0);
+        vacantes.add(vacante1);
+
+        vacante1 = new Vacante(4,"Disenador Grafico","Solicitamos Disenador Grafico titulado para disenar publicidad de la empresa",LocalDate.parse("01-02-2019",df),7500.0);
+        vacantes.add(vacante1);
+
+        return vacantes;
     }
 }

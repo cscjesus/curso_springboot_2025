@@ -53,7 +53,6 @@ public class HomeController {
         model.addAttribute("salario", salario);
         model.addAttribute("vigente", vigente);
         return "home";
-        //seccion 2 video 11
     }
 
     /**

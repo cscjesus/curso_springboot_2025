@@ -1,6 +1,8 @@
 package edu.leon.controller;
 
 import edu.leon.model.Vacante;
+import edu.leon.service.IVacanteService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,10 +14,11 @@ import java.util.List;
 
 @Controller
 public class HomeController {
-
+    @Autowired
+    private IVacanteService serviceVacantes;
     @GetMapping("/tabla")
     public String mostrarTabla(Model model){
-        List<Vacante> lista = getVacantes();
+        List<Vacante> lista = serviceVacantes.buscarTodas();
         model.addAttribute("vacantes",lista);
         return "tabla";
     }
@@ -55,27 +58,5 @@ public class HomeController {
         return "home";
     }
 
-    /**
-     * Metodo que regrsa una lista de objetos de tipo Vacante
-     * @return
-     */
-    private List<Vacante> getVacantes() {
-        List<Vacante> vacantes = new LinkedList<>();
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        var vacante1 = new Vacante(1,"Ingeniero Civil","Se solicita Ing. Civil para " +
-                "disenar puente peatonal",LocalDate.parse("08-02-2019",df),8500.0,1,"empresa1.png");
-        vacantes.add(vacante1);
 
-        vacante1 = new Vacante(2,"Contador Publico","Empresa importante solicita contandor con 5 anios de experiencia titulado",LocalDate.parse("09-02-2019",df),12000.0,0,"empresa2.png");
-        vacantes.add(vacante1);
-
-        vacante1 = new Vacante(3,"Ingeniero Electrico","Empresa internacional solicita Ingeniero Electrico para mantenimiento de instalacion electrica",LocalDate.parse("10-02-2019",df),10500.0,0);
-        vacantes.add(vacante1);
-
-        vacante1 = new Vacante(4,"Disenador Grafico","Solicitamos Disenador Grafico titulado para disenar publicidad de la empresa",LocalDate.parse("01-02-2019",df),7500.0,1,"empresa3.png");
-
-        vacantes.add(vacante1);
-
-        return vacantes;
-    }
 }

@@ -33,4 +33,11 @@ public class VacantesServiceImpl implements IVacanteService {
     public List<Vacante> buscarTodas() {
         return lista;
     }
+
+    @Override
+    public Vacante buscarPorId(Integer id) {
+        return lista.stream()
+                .filter(v ->v.id()==id)
+                .findFirst().orElse(null);
+    }
 }

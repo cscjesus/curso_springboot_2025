@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface IVacanteService {
     List<Vacante> buscarTodas();
+    Vacante buscarPorId(Integer id);
 }

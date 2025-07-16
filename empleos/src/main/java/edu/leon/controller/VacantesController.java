@@ -33,7 +33,12 @@ public class VacantesController {
 
     @Autowired
     private IVacanteService serviceVacantes;
-
+    @GetMapping("/index")
+    public String index(Model model) {
+        var vacantes = serviceVacantes.buscarTodas();
+        model.addAttribute("vacantes", vacantes);
+        return "vacantes/listVacantes";
+    }
     @GetMapping("/create")
     public String crear() {
         return "vacantes/formVacante";

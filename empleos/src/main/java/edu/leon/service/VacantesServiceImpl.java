@@ -40,4 +40,9 @@ public class VacantesServiceImpl implements IVacanteService {
                 .filter(v ->v.id()==id)
                 .findFirst().orElse(null);
     }
+
+    @Override
+    public void guardar(Vacante vacante) {
+        lista.add(vacante);
+    }
 }

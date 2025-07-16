@@ -10,7 +10,7 @@ public record Vacante(Integer id,
                       Double salario,
                       Integer destacado,
                       String imagen,
-                      String estatud,
+                      String estatus ,
                       String detalles) {
    public Vacante(){
        this(null,null,null,null,null,null,"no-image.png",null,null);

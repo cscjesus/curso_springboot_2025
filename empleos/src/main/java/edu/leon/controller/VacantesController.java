@@ -3,13 +3,33 @@ package edu.leon.controller;
 import edu.leon.model.Vacante;
 import edu.leon.service.IVacanteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.format.datetime.standard.DateTimeFormatterRegistrar;
+import org.springframework.format.support.FormattingConversionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+
+import java.beans.PropertyEditorSupport;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Controller
 @RequestMapping(value = "/vacantes")
 public class VacantesController {
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(LocalDate.class, new PropertyEditorSupport()
+        {
+            @Override
+            public void setAsText(String text)
+            {
+                setValue(LocalDate.parse(text,DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+            }
+        });
+    }
 
     @Autowired
     private IVacanteService serviceVacantes;
@@ -21,6 +41,8 @@ public class VacantesController {
 
     @PostMapping("/save")
     public String guardar(Vacante vacante) {
+        System.out.println(vacante);
+        serviceVacantes.guardar(vacante);
         return "vacantes/listVacantes";
     }
 //    @PostMapping("/save")

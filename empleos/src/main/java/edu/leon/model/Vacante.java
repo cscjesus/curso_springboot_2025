@@ -3,12 +3,20 @@ package edu.leon.model;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public record Vacante(Integer id, String nombre, String descripcion, LocalDate fecha,Double salario,Integer destacado,String imagen) {
+public record Vacante(Integer id,
+                      String nombre,
+                      String descripcion,
+                      LocalDate fecha,
+                      Double salario,
+                      Integer destacado,
+                      String imagen,
+                      String estatud,
+                      String detalles) {
    public Vacante(){
-       this(null,null,null,null,null,null,"no-image.png");
+       this(null,null,null,null,null,null,"no-image.png",null,null);
    }
    public Vacante(Integer id, String nombre, String descripcion, LocalDate fecha,Double salario,Integer destacado){
-       this(id,nombre,descripcion,fecha,salario,destacado,"no-image.png");
+       this(id,nombre,descripcion,fecha,salario,destacado,"no-image.png",null,null);
    }
    public String fechaFormat(){
        return fecha.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")).toString();

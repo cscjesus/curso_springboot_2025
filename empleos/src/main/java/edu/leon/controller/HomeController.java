@@ -25,7 +25,7 @@ public class HomeController {
 
     @GetMapping("/detalle")
     public String mostrarDetalle(Model model) {
-        Vacante vacante = new Vacante(0, "Ingeniero de Comunicaciones", "Se solicita Ing. para dar soporte a intranet", LocalDate.now(), 9700.0,0,"no-omage.png");
+        Vacante vacante = new Vacante(0, "Ingeniero de Comunicaciones", "Se solicita Ing. para dar soporte a intranet", LocalDate.now(), 9700.0,0,"no-omage.png",null,null);
         model.addAttribute("vacante", vacante);
         return "detalle";
     }

@@ -8,6 +8,7 @@ import org.springframework.format.datetime.standard.DateTimeFormatterRegistrar;
 import org.springframework.format.support.FormattingConversionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,7 +46,13 @@ public class VacantesController {
     }
 
     @PostMapping("/save")
-    public String guardar(Vacante vacante) {
+    public String guardar(Vacante vacante, BindingResult result) {
+        if(result.hasErrors()){
+            for( var error: result.getAllErrors()){
+                System.out.println("Ocurrio un error: "+error.getDefaultMessage());
+            }
+            return "vacantes/formVacante";
+        }
         System.out.println(vacante);
         serviceVacantes.guardar(vacante);
         return "vacantes/listVacantes";

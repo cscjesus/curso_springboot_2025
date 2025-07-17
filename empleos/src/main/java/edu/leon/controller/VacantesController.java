@@ -55,7 +55,7 @@ public class VacantesController {
         }
         System.out.println(vacante);
         serviceVacantes.guardar(vacante);
-        return "vacantes/listVacantes";
+        return "redirect:/vacantes/index";
     }
 //    @PostMapping("/save")
 //    public String guardar(

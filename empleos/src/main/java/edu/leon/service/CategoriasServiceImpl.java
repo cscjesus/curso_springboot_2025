@@ -38,6 +38,7 @@ public class CategoriasServiceImpl  implements ICategoriasService {
         lista.add(cat3);
         lista.add(cat4);
         lista.add(cat5);
+        lista.add(new Categoria(6,"Desarrollo de software","Trabajo de programador"));
 
     }
 

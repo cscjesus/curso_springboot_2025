@@ -1,6 +1,8 @@
 package edu.leon.controller;
 
 import edu.leon.model.Vacante;
+import edu.leon.service.CategoriasServiceImpl;
+import edu.leon.service.ICategoriasService;
 import edu.leon.service.IVacanteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -21,6 +23,9 @@ import java.time.format.DateTimeFormatter;
 @Controller
 @RequestMapping(value = "/vacantes")
 public class VacantesController {
+    @Autowired
+    private CategoriasServiceImpl categoriasServiceImpl;
+
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(LocalDate.class, new PropertyEditorSupport()
@@ -35,6 +40,10 @@ public class VacantesController {
 
     @Autowired
     private IVacanteService serviceVacantes;
+
+    @Autowired
+    private ICategoriasService serviceCategorias;
+
     @GetMapping("/index")
     public String index(Model model) {
         var vacantes = serviceVacantes.buscarTodas();
@@ -42,7 +51,8 @@ public class VacantesController {
         return "vacantes/listVacantes";
     }
     @GetMapping("/create")
-    public String crear(Vacante vacante) {
+    public String crear(Vacante vacante,Model model) {
+        model.addAttribute("categorias", serviceCategorias.buscarTodas());
         return "vacantes/formVacante";
     }
 
@@ -59,27 +69,7 @@ public class VacantesController {
         attributes.addFlashAttribute("msg", "Registro Guardado");
         return "redirect:/vacantes/index";
     }
-//    @PostMapping("/save")
-//    public String guardar(
-//
-//            @RequestParam("nombre") String nombre,
-//            @RequestParam("descripcion") String descripcion,
-//            @RequestParam("estatus") String estatus,
-//            @RequestParam("fecha") String fecha,
-//            @RequestParam("destacado") int destacado,
-//            @RequestParam("salario") double salario,
-//            @RequestParam("detalles") String detalles
-//
-//    ) {
-//        System.out.println("nombre: " + nombre);
-//        System.out.println("descripcion: " + descripcion);
-//        System.out.println("estatus: " + estatus);
-//        System.out.println("fecha: " + fecha);
-//        System.out.println("destacado: " + destacado);
-//        System.out.println("salario: " + salario);
-//        System.out.println("detalles: " + detalles);
-//        return "vacantes/listVacantes";
-//    }
+
 
     @GetMapping("/delete")
     public String eliminar(@RequestParam("id") int idVacante, Model model) {

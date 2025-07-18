@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class Utileria {
     public static String guardarArchivo(MultipartFile multiPart, String ruta){
-        String nombreOriginal = multiPart.getOriginalFilename();
+        String nombreOriginal = multiPart.getOriginalFilename().replace(" ","-");
         try{
             File imageFile = new File(ruta + nombreOriginal);
             System.out.println("Archivo: " + imageFile.getAbsolutePath());

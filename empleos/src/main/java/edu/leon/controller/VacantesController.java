@@ -53,6 +53,7 @@ public class VacantesController {
     @GetMapping("/create")
     public String crear(Vacante vacante,Model model) {
         model.addAttribute("categorias", serviceCategorias.buscarTodas());
+//        model.addAttribute("vacante", vacante);
         return "vacantes/formVacante";
     }
 

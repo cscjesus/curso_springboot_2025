@@ -52,7 +52,7 @@ public class CategoriasServiceImpl  implements ICategoriasService {
 
     public Categoria buscarPorId(Integer idCategoria) {
         for (Categoria cat : lista) {
-            if (cat.id()==idCategoria) {
+            if (cat.getId()==idCategoria) {
                 return cat;
             }
         }

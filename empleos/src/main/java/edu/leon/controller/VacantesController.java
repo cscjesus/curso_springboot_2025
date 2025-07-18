@@ -4,19 +4,17 @@ import edu.leon.model.Vacante;
 import edu.leon.service.CategoriasServiceImpl;
 import edu.leon.service.ICategoriasService;
 import edu.leon.service.IVacanteService;
+import edu.leon.util.Utileria;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.format.datetime.standard.DateTimeFormatterRegistrar;
-import org.springframework.format.support.FormattingConversionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.beans.PropertyEditorSupport;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -58,12 +56,19 @@ public class VacantesController {
     }
 
     @PostMapping("/save")
-    public String guardar(Vacante vacante, BindingResult result, RedirectAttributes attributes) {
+    public String guardar(Vacante vacante, BindingResult result, RedirectAttributes attributes, @RequestParam("archivoImagen") MultipartFile multiPart) {
         if(result.hasErrors()){
             for( var error: result.getAllErrors()){
                 System.out.println("Ocurrio un error: "+error.getDefaultMessage());
             }
             return "vacantes/formVacante";
+        }
+        if(!multiPart.isEmpty()){
+            String ruta = "/tmp/img-vacantes/";
+            String nombreImagen = Utileria.guardarArchivo(multiPart,ruta);
+            if(nombreImagen != null){
+                vacante.setImagen(nombreImagen);
+            }
         }
         serviceVacantes.guardar(vacante);
         System.out.println(vacante);

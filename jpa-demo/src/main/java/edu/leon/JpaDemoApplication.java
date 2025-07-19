@@ -21,7 +21,8 @@ public class JpaDemoApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
 //        guardar();
 //        buscarPorId(10);
-        modificar(2);
+        //modificar(2);
+        eliminar(1);
     }
 
     private void guardar() {
@@ -31,9 +32,7 @@ public class JpaDemoApplication implements CommandLineRunner {
        categoriasRepo.save(categoria);
         System.out.println(categoria);
     }
-    private void eliminar() {
-        System.out.println("Elimando ...");
-    }
+
     private void buscarPorId(Integer id) {
         Optional<Categoria> categoria = categoriasRepo.findById(id);
         if(categoria.isPresent())
@@ -51,5 +50,8 @@ public class JpaDemoApplication implements CommandLineRunner {
         }else
             System.out.println("No existe categoria");
     }
-//seccion 8 video 14
+    private void eliminar(int id){
+        categoriasRepo.deleteById(id);
+    }
+//seccion 8 video 16
 }

@@ -21,6 +21,7 @@ public class JpaDemoApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
 //        guardar();
 //        buscarPorId(10);
+        modificar(2);
     }
 
     private void guardar() {
@@ -40,6 +41,15 @@ public class JpaDemoApplication implements CommandLineRunner {
         else
             System.out.println("Categoria no encontrada");
     }
-
+    public void modificar(int id){
+        var categoria =  categoriasRepo.findById(id);
+        if(categoria.isPresent()){
+            var catTmp = categoria.get();
+            catTmp.setNombre("Ing. de Sofware");
+            catTmp.setDescripcion("Desarrollo de Sistemas");
+            categoriasRepo.save(catTmp);
+        }else
+            System.out.println("No existe categoria");
+    }
 //seccion 8 video 14
 }

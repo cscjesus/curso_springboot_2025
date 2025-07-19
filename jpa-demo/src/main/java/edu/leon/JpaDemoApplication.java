@@ -1,5 +1,6 @@
 package edu.leon;
 
+import edu.leon.model.Categoria;
 import edu.leon.respositories.CategoriasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -16,14 +17,18 @@ public class JpaDemoApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        System.out.println(categoriasRepo);
+        guardar();
     }
 
     private void guardar() {
-        System.out.println("Insertando ...");
+       Categoria categoria = new Categoria();
+       categoria.setNombre("Finanzas");
+       categoria.setDescripcion("Trabajos relacionados con finanzas y contabilidad");
+       categoriasRepo.save(categoria);
+        System.out.println(categoria);
     }
     private void eliminar() {
         System.out.println("Elimando ...");
     }
-//seccion 8 video 12
+//seccion 8 video 13
 }

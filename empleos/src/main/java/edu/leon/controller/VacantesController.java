@@ -6,6 +6,7 @@ import edu.leon.service.ICategoriasService;
 import edu.leon.service.IVacanteService;
 import edu.leon.util.Utileria;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +22,10 @@ import java.time.format.DateTimeFormatter;
 @Controller
 @RequestMapping(value = "/vacantes")
 public class VacantesController {
+
+    @Value("${empleosapp.ruta.imagenes} ")
+    private String ruta;
+
     @Autowired
     private CategoriasServiceImpl categoriasServiceImpl;
 
@@ -41,6 +46,7 @@ public class VacantesController {
 
     @Autowired
     private ICategoriasService serviceCategorias;
+
 
     @GetMapping("/index")
     public String index(Model model) {
@@ -64,7 +70,7 @@ public class VacantesController {
             return "vacantes/formVacante";
         }
         if(!multiPart.isEmpty()){
-            String ruta = "/tmp/img-vacantes/";
+//            String ruta = "/tmp/img-vacantes/";
             String nombreImagen = Utileria.guardarArchivo(multiPart,ruta);
             if(nombreImagen != null){
                 vacante.setImagen(nombreImagen);

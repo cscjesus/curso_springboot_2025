@@ -22,7 +22,8 @@ public class JpaDemoApplication implements CommandLineRunner {
 //        guardar();
 //        buscarPorId(10);
         //modificar(2);
-        eliminar(1);
+        //eliminar(1);
+        conteo();
     }
 
     private void guardar() {
@@ -52,6 +53,9 @@ public class JpaDemoApplication implements CommandLineRunner {
     }
     private void eliminar(int id){
         categoriasRepo.deleteById(id);
+    }
+    private void conteo(){
+        System.out.println("Total categorias: " + categoriasRepo.count());
     }
 //seccion 8 video 16
 }

@@ -7,6 +7,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.Optional;
+
 @SpringBootApplication
 public class JpaDemoApplication implements CommandLineRunner {
     @Autowired
@@ -17,7 +19,8 @@ public class JpaDemoApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        guardar();
+//        guardar();
+//        buscarPorId(10);
     }
 
     private void guardar() {
@@ -30,5 +33,13 @@ public class JpaDemoApplication implements CommandLineRunner {
     private void eliminar() {
         System.out.println("Elimando ...");
     }
-//seccion 8 video 13
+    private void buscarPorId(Integer id) {
+        Optional<Categoria> categoria = categoriasRepo.findById(id);
+        if(categoria.isPresent())
+            System.out.println(categoria.get());
+        else
+            System.out.println("Categoria no encontrada");
+    }
+
+//seccion 8 video 14
 }

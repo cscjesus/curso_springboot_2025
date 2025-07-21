@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -31,7 +33,10 @@ public class JpaDemoApplication implements CommandLineRunner {
 //        guardarTodas();
         //
 //         buscarTodosJpa();
-        borrarTodoEnBloque();
+//        borrarTodoEnBloque();
+//        buscarTodosOrdenados();
+//        buscarTodosPaginacion();
+        buscarTodosPaginacionOrdenados();
     }
 
     private void guardar() {
@@ -99,5 +104,20 @@ public class JpaDemoApplication implements CommandLineRunner {
     private void borrarTodoEnBloque(){
         categoriasRepo.deleteAllInBatch();
     }
-//seccion 9 video 3
+    private void buscarTodosOrdenados(){
+        List<Categoria> categorias = categoriasRepo.findAll(Sort.by("nombre").descending());
+        categorias.forEach(System.out::println);
+    }
+    private void buscarTodosPaginacion(){
+        var pageCat = categoriasRepo.findAll(PageRequest.of(0,5));
+        System.out.println("Total registros: " + pageCat.getTotalElements() + "");
+        System.out.println("Total paginas: " + pageCat.getTotalPages() + "");
+        pageCat.forEach(System.out::println);
+    }
+    public void buscarTodosPaginacionOrdenados(){
+        var pageCat = categoriasRepo.findAll(PageRequest.of(0,5, Sort.by("nombre").descending()));
+        pageCat.forEach(System.out::println);
+//        System.out.println("Total registros: " + pageCat.getTotalElements() + "");
+    }
+//seccion 9 video 6
 }

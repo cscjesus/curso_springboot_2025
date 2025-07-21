@@ -2,6 +2,7 @@ package edu.leon;
 
 import edu.leon.model.Categoria;
 import edu.leon.respositories.CategoriasRepository;
+import edu.leon.respositories.VacantesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -17,6 +18,9 @@ import java.util.Optional;
 public class JpaDemoApplication implements CommandLineRunner {
     @Autowired
     private CategoriasRepository categoriasRepo;
+    @Autowired
+    private VacantesRepository vacantesRepo;
+
     public static void main(String[] args) {
         SpringApplication.run(JpaDemoApplication.class, args);
     }
@@ -36,7 +40,9 @@ public class JpaDemoApplication implements CommandLineRunner {
 //        borrarTodoEnBloque();
 //        buscarTodosOrdenados();
 //        buscarTodosPaginacion();
-        buscarTodosPaginacionOrdenados();
+        //buscarTodosPaginacionOrdenados();
+
+        buscarVacantes();
     }
 
     private void guardar() {
@@ -119,5 +125,9 @@ public class JpaDemoApplication implements CommandLineRunner {
         pageCat.forEach(System.out::println);
 //        System.out.println("Total registros: " + pageCat.getTotalElements() + "");
     }
-//seccion 9 video 6
+    private void buscarVacantes(){
+        var vacantes = vacantesRepo.findAll();
+        vacantes.forEach(v->System.out.println(v.getId()+" "+v.getNombre() +"-" + v.getCategoria().getNombre()));
+    }
+//seccion 10 video 3
 }

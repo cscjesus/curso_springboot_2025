@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 @Table(name = "Vacantes")
 public class Vacante {
     @Id
-            @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
     String nombre;
     String descripcion;
@@ -21,7 +21,10 @@ public class Vacante {
     String estatus;
     String detalles;
 
-    @ManyToOne
+    //    @ManyToOne
+//    @Transient
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idCategoria")//idCatgoria existe en la tabla Vacantes
     Categoria categoria;
 
     public String fechaFormat() {

@@ -3,6 +3,8 @@ package edu.leon;
 import edu.leon.model.Categoria;
 import edu.leon.model.Vacante;
 import edu.leon.respositories.CategoriasRepository;
+import edu.leon.respositories.PerfilesRepository;
+import edu.leon.respositories.UsuariosRepository;
 import edu.leon.respositories.VacantesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -21,6 +23,10 @@ public class JpaDemoApplication implements CommandLineRunner {
     private CategoriasRepository categoriasRepo;
     @Autowired
     private VacantesRepository vacantesRepo;
+    @Autowired
+    PerfilesRepository perfilesRepo;
+    @Autowired
+    UsuariosRepository usuariosRepo;
 
     public static void main(String[] args) {
         SpringApplication.run(JpaDemoApplication.class, args);
@@ -149,5 +155,5 @@ public class JpaDemoApplication implements CommandLineRunner {
         vacantesRepo.save(vacante);
 
     }
-//seccion 10 video 4
+//seccion 10 video 5
 }

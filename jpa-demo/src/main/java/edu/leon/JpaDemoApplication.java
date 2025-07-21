@@ -30,7 +30,8 @@ public class JpaDemoApplication implements CommandLineRunner {
 //        existeId();
 //        guardarTodas();
         //
-         buscarTodosJpa();
+//         buscarTodosJpa();
+        borrarTodoEnBloque();
     }
 
     private void guardar() {
@@ -95,5 +96,8 @@ public class JpaDemoApplication implements CommandLineRunner {
         List<Categoria> categorias = categoriasRepo.findAll();
         categorias.forEach(System.out::println);
     }
-//seccion 9 video 2
+    private void borrarTodoEnBloque(){
+        categoriasRepo.deleteAllInBatch();
+    }
+//seccion 9 video 3
 }

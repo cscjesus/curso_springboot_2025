@@ -26,7 +26,7 @@ public class JpaDemoApplication implements CommandLineRunner {
         //modificar(2);
         //eliminar(1);
 //        conteo();
-        findAllById();
+        findAll();
     }
 
     private void guardar() {
@@ -70,5 +70,8 @@ public class JpaDemoApplication implements CommandLineRunner {
         var  categorias = categoriasRepo.findAllById(ids);
         categorias.forEach(System.out::println);
     }
-//seccion 8 video 18
+    private void findAll(){
+        categoriasRepo.findAll().forEach(System.out::println);
+    }
+//seccion 8 video 19
 }

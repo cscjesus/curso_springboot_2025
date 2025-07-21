@@ -1,6 +1,7 @@
 package edu.leon;
 
 import edu.leon.model.Categoria;
+import edu.leon.model.Perfil;
 import edu.leon.model.Vacante;
 import edu.leon.respositories.CategoriasRepository;
 import edu.leon.respositories.PerfilesRepository;
@@ -50,7 +51,8 @@ public class JpaDemoApplication implements CommandLineRunner {
         //buscarTodosPaginacionOrdenados();
 
 //        buscarVacantes();
-        guardarVacante();
+//        guardarVacante();
+        crearPerfilesAplicacion();
     }
 
     private void guardar() {
@@ -155,5 +157,15 @@ public class JpaDemoApplication implements CommandLineRunner {
         vacantesRepo.save(vacante);
 
     }
-//seccion 10 video 5
+    private void crearPerfilesAplicacion(){
+       getPerfilesAplicacion().forEach(p->perfilesRepo.save(p));
+    }
+    private List<Perfil> getPerfilesAplicacion(){
+        List<Perfil> perfiles = new LinkedList<>();
+        perfiles.add(new Perfil(null,"SUPERVISOR"));
+        perfiles.add(new Perfil(null,"ADMINISTRADOR"));
+        perfiles.add(new Perfil(null,"USUARIO"));
+        return perfiles;
+    }
+//seccion 10 video 6
 }

@@ -23,7 +23,8 @@ public class Vacante {
 
     //    @ManyToOne
 //    @Transient
-    @OneToOne(cascade = CascadeType.ALL)
+//    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
     @JoinColumn(name = "idCategoria")//idCatgoria existe en la tabla Vacantes
     Categoria categoria;
 

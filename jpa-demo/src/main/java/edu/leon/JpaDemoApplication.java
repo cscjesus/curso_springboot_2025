@@ -1,6 +1,7 @@
 package edu.leon;
 
 import edu.leon.model.Categoria;
+import edu.leon.model.Vacante;
 import edu.leon.respositories.CategoriasRepository;
 import edu.leon.respositories.VacantesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,8 @@ public class JpaDemoApplication implements CommandLineRunner {
 //        buscarTodosPaginacion();
         //buscarTodosPaginacionOrdenados();
 
-        buscarVacantes();
+//        buscarVacantes();
+        guardarVacante();
     }
 
     private void guardar() {
@@ -129,5 +131,23 @@ public class JpaDemoApplication implements CommandLineRunner {
         var vacantes = vacantesRepo.findAll();
         vacantes.forEach(v->System.out.println(v.getId()+" "+v.getNombre() +"-" + v.getCategoria().getNombre()));
     }
-//seccion 10 video 3
+    private void guardarVacante() {
+        Vacante vacante = new Vacante();
+        vacante.setNombre("Ingeniero de Sistemas");
+        vacante.setDescripcion("Desarrollador de aplicaciones web");
+        vacante.setFecha(java.time.LocalDate.now());
+        vacante.setSalario(15000.0);
+        vacante.setEstatus("Aprobada");
+        vacante.setDestacado(0);
+        vacante.setImagen("empresa1.png");
+        vacante.setDetalles("<h1>Desarrollo de Sistemas</h1> <br/> <p>Desarrollador de aplicaciones web</p>");
+        //5:06
+        Categoria categoria = new Categoria();
+        categoria.setId(14);
+        vacante.setCategoria(categoria);
+
+        vacantesRepo.save(vacante);
+
+    }
+//seccion 10 video 4
 }

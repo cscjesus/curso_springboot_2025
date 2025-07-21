@@ -28,7 +28,9 @@ public class JpaDemoApplication implements CommandLineRunner {
 //        conteo();
 //        findAll();
 //        existeId();
-        guardarTodas();
+//        guardarTodas();
+        //
+         buscarTodosJpa();
     }
 
     private void guardar() {
@@ -86,5 +88,12 @@ public class JpaDemoApplication implements CommandLineRunner {
         categorias.add(new Categoria("Programador","Trabajos realacionados a desarrollo de aplicaciones"));
         categoriasRepo.saveAll(categorias);
     }
-//seccion 8 video 22
+    //inicio de JpaRepository
+    private void buscarTodosJpa(){
+        //el metodo ya no regresa Iterable...
+        //regresa List...
+        List<Categoria> categorias = categoriasRepo.findAll();
+        categorias.forEach(System.out::println);
+    }
+//seccion 9 video 2
 }

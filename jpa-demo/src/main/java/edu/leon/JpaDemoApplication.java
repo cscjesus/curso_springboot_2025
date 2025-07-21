@@ -26,7 +26,9 @@ public class JpaDemoApplication implements CommandLineRunner {
         //modificar(2);
         //eliminar(1);
 //        conteo();
-        findAll();
+//        findAll();
+//        existeId();
+        guardarTodas();
     }
 
     private void guardar() {
@@ -73,5 +75,16 @@ public class JpaDemoApplication implements CommandLineRunner {
     private void findAll(){
         categoriasRepo.findAll().forEach(System.out::println);
     }
-//seccion 8 video 19
+    private  void existeId(){
+        var existe = categoriasRepo.existsById(100);
+        System.out.println(existe);
+    }
+    private void guardarTodas(){
+        List<Categoria> categorias = new LinkedList<>();
+        categorias.add(new Categoria("Desarrollo","Desarrollo de aplicaciones"));
+        categorias.add(new Categoria("Finanzas","Finanzas y contabilidad"));
+        categorias.add(new Categoria("Programador","Trabajos realacionados a desarrollo de aplicaciones"));
+        categoriasRepo.saveAll(categorias);
+    }
+//seccion 8 video 22
 }

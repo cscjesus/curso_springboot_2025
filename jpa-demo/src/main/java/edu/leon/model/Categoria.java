@@ -14,8 +14,7 @@ String descripcion;
 
     public Categoria() {
     }
-    public Categoria(Integer id, String nombre, String descripcion) {
-        this.id = id;
+    public Categoria( String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
     }

@@ -38,7 +38,7 @@ public class JpaDemoApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        crearUsuarioConDosPerfiles();
+        buscarUsuario();
     }
 
     private void guardar() {
@@ -186,5 +186,12 @@ public class JpaDemoApplication implements CommandLineRunner {
 
         usuariosRepo.save(usuario);
     }
-//seccion 10 video 8
+
+    public void buscarUsuario() {
+        var usuario = usuariosRepo.findById(1);
+        System.out.println(usuario.get());
+        System.out.println("Perfiles del usuario: ");
+        usuario.get().getPerfiles().forEach(System.out::println);
+    }
+//seccion 10 video 9
 }

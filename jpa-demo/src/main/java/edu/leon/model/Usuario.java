@@ -3,6 +3,7 @@ package edu.leon.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.LinkedList;
 import java.util.List;
 
 @Entity
@@ -18,12 +19,18 @@ public class Usuario {
     private Integer estatus;
     private LocalDate fechaRegistro;
     //mucho a muchos
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "UsuarioPerfil",
+    //el orden de las llaves foraneas importa, primero va la clase actual
+    @ManyToMany(fetch = FetchType.EAGER)//tambien inserta automaticamente los perfiles
+    @JoinTable(name = "UsuarioPerfil",//tabla intermedia
             joinColumns = @JoinColumn(name = "idUsuario"),//tabla intermedia campo
             inverseJoinColumns = @JoinColumn(name = "idPerfil"))//tabla intermedia campo
     private List<Perfil> perfiles;
-
+    public void agregar(Perfil perfil) {
+        if (perfiles == null) {
+            this.perfiles = new LinkedList<>();
+        }
+        this.perfiles.add(perfil);
+    }
     public Integer getId() {
         return id;
     }

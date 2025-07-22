@@ -33,6 +33,9 @@ public class Perfil {
         this.id = id;
         this.perfil = perfil;
     }
+    public Perfil(Integer id) {
+        this.id = id;
+    }
 
     @Override
     public String toString() {

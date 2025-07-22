@@ -1,6 +1,5 @@
 package edu.leon.controller;
 
-import edu.leon.model.Categoria;
 import edu.leon.model.Vacante;
 import edu.leon.service.IVacanteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
 

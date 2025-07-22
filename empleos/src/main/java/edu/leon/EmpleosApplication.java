@@ -9,6 +9,6 @@ public class EmpleosApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(EmpleosApplication.class, args);
 	}
-	//seccion 7 video 5
+	//seccion 12 video 2
 
 }

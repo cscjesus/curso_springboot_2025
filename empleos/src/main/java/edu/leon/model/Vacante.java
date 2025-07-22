@@ -1,24 +1,33 @@
 package edu.leon.model;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
 //una Vacante pertenece a una Categoria
-public class Vacante{
+@Entity
+@Table(name = "Vacantes")
+public class Vacante {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
-                      String nombre;
-                      String descripcion;
-                      LocalDate fecha;
-                      Double salario;
-                      Integer destacado;
-                      String imagen="no-image.png";
-                      String estatus ;
-                      String detalles;
+    String nombre;
+    String descripcion;
+    LocalDate fecha;
+    Double salario;
+    Integer destacado;
+    String imagen = "no-image.png";
+    String estatus;
+    String detalles;
 
-                      Categoria categoria;
+    @OneToOne()
+    @JoinColumn(name = "idCategoria")//idCategoria clave foranea
+            Categoria categoria;
 
-   public String fechaFormat(){
-       return fecha.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")).toString();
-   }
+    public String fechaFormat() {
+        return fecha.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")).toString();
+    }
 
     public Vacante() {
     }

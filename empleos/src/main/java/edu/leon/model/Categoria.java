@@ -1,15 +1,21 @@
 package edu.leon.model;
-//una Categoria tiene muchas Vacantes
-public class Categoria{
 
-Integer id;
-String nombre;
-String descripcion;
+import jakarta.persistence.*;
+
+//una Categoria tiene muchas Vacantes
+@Entity
+@Table(name = "Categorias")
+public class Categoria {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Integer id;
+    String nombre;
+    String descripcion;
 
     public Categoria() {
     }
-    public Categoria(Integer id, String nombre, String descripcion) {
-        this.id = id;
+
+    public Categoria(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
     }

@@ -15,20 +15,20 @@ public class CategoriasServiceImpl  implements ICategoriasService {
 
         // Categoria 1
         Categoria cat1 = new Categoria(
-        1,"Contabilidad","Descripcion de la categoria Contabilidad");
+        "Contabilidad","Descripcion de la categoria Contabilidad");
 
         // Categoria 2
-        Categoria cat2 = new Categoria(2,"Ventas","Trabajos relacionados con Ventas");
+        Categoria cat2 = new Categoria("Ventas","Trabajos relacionados con Ventas");
 
 
         // Categoria 3
-        Categoria cat3 = new Categoria(3,"Comunicaciones","Trabajos relacionados con Comunicaciones");
+        Categoria cat3 = new Categoria("Comunicaciones","Trabajos relacionados con Comunicaciones");
 
         // Categoria 4
-        Categoria cat4 = new Categoria(4,"Arquitectura","Trabajos de Arquitectura");
+        Categoria cat4 = new Categoria("Arquitectura","Trabajos de Arquitectura");
 
         // Categoria 5
-        Categoria cat5 = new Categoria(5,"Educacion","Maestros, tutores, etc");
+        Categoria cat5 = new Categoria("Educacion","Maestros, tutores, etc");
 
         /**
          * Agregamos los 5 objetos de tipo Categoria a la lista ...
@@ -38,7 +38,7 @@ public class CategoriasServiceImpl  implements ICategoriasService {
         lista.add(cat3);
         lista.add(cat4);
         lista.add(cat5);
-        lista.add(new Categoria(6,"Desarrollo de software","Trabajo de programador"));
+        lista.add(new Categoria("Desarrollo de software","Trabajo de programador"));
 
     }
 

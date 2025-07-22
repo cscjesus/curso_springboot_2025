@@ -23,26 +23,26 @@
     </tr>
     <tr th:each="vacante : ${vacantes}">
         <td>
-            <img th:src="@{/images/{img} (img=${vacante.imagen()})}" width="136" height="136">
+            <img th:src="@{/images/{img} (img=${vacante.imagen})}" width="136" height="136">
         </td>
-        <td th:text="${vacante.id()}"></td>
-        <td th:text="${vacante.nombre()}"></td>
-        <td th:text="${vacante.fecha()}"></td>
-        <td th:text="${vacante.salario()}"></td>
-        <td th:text="${vacante.descripcion()}"></td>
-        <!--            <td th:text="${vacante.destacado()==1}?'Si':'No'"></td>-->
+        <td th:text="${vacante.id}"></td>
+        <td th:text="${vacante.nombre}"></td>
+        <td th:text="${vacante.fecha}"></td>
+        <td th:text="${vacante.salario}"></td>
+        <td th:text="${vacante.descripcion}"></td>
+        <!--            <td th:text="${vacante.destacado==1}?'Si':'No'"></td>-->
         <td>
-            <span th:if="${vacante.destacado()==1}" class="badge text-bg-success">Si</span>
-            <span th:unless="${vacante.destacado()==1}" class="badge text-bg-danger">No</span>
+            <span th:if="${vacante.destacado==1}" class="badge text-bg-success">Si</span>
+            <span th:unless="${vacante.destacado==1}" class="badge text-bg-danger">No</span>
         </td>
         <td>
 <!--            path variable-->
-            <a th:href="@{/vacantes/view/{id} (id=${vacante.id()} )}" class="btn btn-success">Detalle</a>
+            <a th:href="@{/vacantes/view/{id} (id=${vacante.id} )}" class="btn btn-success">Detalle</a>
         </td>
 
         <td>
 <!--            request param-->
-            <a th:href="@{/vacantes/delete(id=${vacante.id()} )}" class="btn btn-danger">Borrar</a>
+            <a th:href="@{/vacantes/delete(id=${vacante.id} )}" class="btn btn-danger">Borrar</a>
         </td>
     </tr>
 

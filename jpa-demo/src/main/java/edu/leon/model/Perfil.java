@@ -33,4 +33,12 @@ public class Perfil {
         this.id = id;
         this.perfil = perfil;
     }
+
+    @Override
+    public String toString() {
+        return "Perfil{" +
+                "id=" + id +
+                ", perfil='" + perfil + '\'' +
+                '}';
+    }
 }

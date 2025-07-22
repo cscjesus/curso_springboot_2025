@@ -25,7 +25,7 @@ public class Vacante {
 //    @Transient
 //    @OneToOne(cascade = CascadeType.ALL)
     @OneToOne()
-    @JoinColumn(name = "idCategoria")//idCatgoria existe en la tabla Vacantes
+    @JoinColumn(name = "idCategoria")//idCatgoria de la tabla Vacantes en la BD
     Categoria categoria;
 
     public String fechaFormat() {

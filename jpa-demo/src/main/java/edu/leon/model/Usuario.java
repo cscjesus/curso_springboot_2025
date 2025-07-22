@@ -3,6 +3,7 @@ package edu.leon.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "Usuarios")
@@ -16,9 +17,23 @@ public class Usuario {
     private String password;
     private Integer estatus;
     private LocalDate fechaRegistro;
+    //mucho a muchos
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "UsuarioPerfil",
+            joinColumns = @JoinColumn(name = "idUsuario"),//tabla intermedia campo
+            inverseJoinColumns = @JoinColumn(name = "idPerfil"))//tabla intermedia campo
+    private List<Perfil> perfiles;
 
     public Integer getId() {
         return id;
+    }
+
+    public List<Perfil> getPerfiles() {
+        return perfiles;
+    }
+
+    public void setPerfiles(List<Perfil> perfiles) {
+        this.perfiles = perfiles;
     }
 
     public void setId(Integer id) {
@@ -76,7 +91,7 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(Integer id, String username, String nombre, String email, String password, Integer estatus, LocalDate fechaRegistro) {
+    public Usuario(Integer id, String username, String nombre, String email, String password, Integer estatus, LocalDate fechaRegistro, List<Perfil> perfiles) {
         this.id = id;
         this.username = username;
         this.nombre = nombre;
@@ -84,5 +99,20 @@ public class Usuario {
         this.password = password;
         this.estatus = estatus;
         this.fechaRegistro = fechaRegistro;
+        this.perfiles = perfiles;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", estatus=" + estatus +
+                ", fechaRegistro=" + fechaRegistro +
+                ", perfiles=" + perfiles +
+                '}';
     }
 }

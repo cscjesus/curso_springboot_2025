@@ -38,7 +38,7 @@ public class JpaDemoApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        buscarVacantesRangoSalario();
+        buscarVacantesVariosEstatus();
     }
 
     private void guardar() {
@@ -212,5 +212,11 @@ public class JpaDemoApplication implements CommandLineRunner {
         System.out.println("Vacantes encontradas: " + vacantes.size());
         vacantes.forEach(v -> System.out.println(v.getId() + " " + v.getNombre() + " $" + v.getSalario()));
     }
-//seccion 11 video 4
+    private void buscarVacantesVariosEstatus(){
+        var estatus = List.of("Aprobada", "Cancelada");
+        var vacantes = vacantesRepo.findByEstatusIn(estatus);
+        System.out.println("Vacantes encontradas: " + vacantes.size());
+        vacantes.forEach(v -> System.out.println(v.getId() + " " + v.getNombre() + " " + v.getEstatus()));
+    }
+//seccion 11 video 5
 }

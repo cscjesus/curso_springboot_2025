@@ -9,4 +9,5 @@ public interface VacantesRepository extends JpaRepository<Vacante,Integer> {
     // Aquí puedes agregar métodos personalizados si es necesario
     List<Vacante> findByEstatus(String estatus);
     List<Vacante> findByDestacadoAndEstatusOrderByIdDesc(Integer destacado, String estatus);
+    List<Vacante>  findBySalarioBetweenOrderBySalarioDesc(Double salario, Double salario2);
 }

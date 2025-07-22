@@ -8,4 +8,5 @@ import java.util.List;
 public interface VacantesRepository extends JpaRepository<Vacante,Integer> {
     // Aquí puedes agregar métodos personalizados si es necesario
     List<Vacante> findByEstatus(String estatus);
+    List<Vacante> findByDestacadoAndEstatusOrderByIdDesc(Integer destacado, String estatus);
 }

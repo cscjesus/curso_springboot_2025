@@ -42,7 +42,7 @@
                     </thead>
                     <tbody>
                     <tr th:each="vacante:${vacantes}">
-                        <td>Ventas</td>
+                        <td th:text="${vacante.categoria.nombre}"></td>
                         <td th:text="${vacante.nombre}">Supervisor de Ventas</td>
                         <td th:text="${vacante.fechaFormat}">11-01-2023</td>
                         <td th:text="${vacante.estatus}">Creada</td>

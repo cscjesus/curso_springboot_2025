@@ -1,9 +1,11 @@
 package edu.leon.service;
 import edu.leon.model.Categoria;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 @Service
+//@Primary
 public class CategoriasServiceImpl  implements ICategoriasService {
 
     private List<Categoria> lista = null;

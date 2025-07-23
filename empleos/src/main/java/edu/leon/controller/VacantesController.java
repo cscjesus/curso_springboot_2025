@@ -6,6 +6,7 @@ import edu.leon.service.ICategoriasService;
 import edu.leon.service.IVacanteService;
 import edu.leon.util.Utileria;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,6 +46,7 @@ public class VacantesController {
     private IVacanteService serviceVacantes;
 
     @Autowired
+    @Qualifier("categoriasServiceJpa")
     private ICategoriasService serviceCategorias;
 
 

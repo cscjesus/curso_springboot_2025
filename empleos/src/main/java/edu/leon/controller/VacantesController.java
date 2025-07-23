@@ -24,7 +24,7 @@ import java.time.format.DateTimeFormatter;
 @RequestMapping(value = "/vacantes")
 public class VacantesController {
 
-    @Value("${empleosapp.ruta.imagenes} ")
+    @Value("${empleosapp.ruta.imagenes}")
     private String ruta;
 
     @Autowired

@@ -50,7 +50,8 @@
         <hr>
         <div class="row" th:each="vacante:${vacantes}">
             <div class="col-md-3">
-                <img class="rounded mx-auto d-block" th:src="@{/images/{img} (img=${vacante.getImagen()==null?'no-image.png':vacante.getImagen()})}" alt="Generic placeholder image"
+<!--                <img class="rounded mx-auto d-block" th:src="@{/images/{img} (img=${vacante.getImagen()==null?'no-image.png':vacante.getImagen()})}" alt="Generic placeholder image"-->
+                <img class="rounded mx-auto d-block" th:src="@{/logos/{img} (img=${vacante.getImagen()==null?'no-image.png':vacante.getImagen()})}" alt="Generic placeholder image"
                      width="220" height="220">
             </div>
             <div class="col-md-9">

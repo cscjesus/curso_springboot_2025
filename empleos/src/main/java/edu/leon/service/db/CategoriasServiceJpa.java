@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CategoriaServiceJpa implements ICategoriasService {
+//@Primary
+public class CategoriasServiceJpa implements ICategoriasService {
 
     @Autowired
     private CategoriasRepository categoriasRepository;

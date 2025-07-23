@@ -50,4 +50,9 @@ public class VacantesServiceImpl implements IVacanteService {
     public List<Vacante> buscarDestacadas() {
         return List.of();
     }
+
+    @Override
+    public void eliminar(Integer id) {
+
+    }
 }

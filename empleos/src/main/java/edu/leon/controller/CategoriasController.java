@@ -44,5 +44,18 @@ public class CategoriasController {
         attributes.addFlashAttribute("msg", "Los datos de la categoría fueron guardados!");
         return "redirect:/categorias/index";
     }
+    @GetMapping("/edit/{id}")
+    public String editar(@PathVariable("id") int idCategoria, Model model) {
+        Categoria categoria = serviceCategorias.buscarPorId(idCategoria);
+        model.addAttribute("categoria", categoria);
+        return "categorias/formCategoria";
+    }
 
+    @GetMapping("/delete/{id}")
+    public String eliminar(@PathVariable("id") int idCategoria, RedirectAttributes attributes) {
+        // Eliminamos la categoria.
+        serviceCategorias.eliminar(idCategoria);
+        attributes.addFlashAttribute("msg", "La categoría fue eliminada!.");
+        return "redirect:/categorias/index";
+    }
 }

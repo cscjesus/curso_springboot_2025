@@ -58,13 +58,14 @@ public class VacantesController {
     }
     @GetMapping("/create")
     public String crear(Vacante vacante, Model model) {
-        model.addAttribute("categorias", serviceCategorias.buscarTodas());
+        setGenericos(model);
 //        model.addAttribute("vacante", vacante);
         return "vacantes/formVacante";
     }
 
     @PostMapping("/save")
-    public String guardar(Vacante vacante, BindingResult result, RedirectAttributes attributes, @RequestParam("archivoImagen") MultipartFile multiPart) {
+    public String guardar(Vacante vacante, BindingResult result, RedirectAttributes attributes, @RequestParam(value = "archivoImagen",required = false) MultipartFile multiPart) {
+        System.out.println(vacante);
         if(result.hasErrors()){
             for( var error: result.getAllErrors()){
                 System.out.println("Ocurrio un error: "+error.getDefaultMessage());
@@ -72,7 +73,6 @@ public class VacantesController {
             return "vacantes/formVacante";
         }
         if(!multiPart.isEmpty()){
-//            String ruta = "/tmp/img-vacantes/";
             String nombreImagen = Utileria.guardarArchivo(multiPart,ruta);
             if(nombreImagen != null){
                 vacante.setImagen(nombreImagen);
@@ -92,7 +92,13 @@ public class VacantesController {
         attributes.addFlashAttribute("msg", "Vacante Eliminada");
         return "redirect:/vacantes/index";
     }
-
+    @GetMapping("/edit/{id}")
+    public String editar(@PathVariable("id") int idVacante, Model model) {
+        var vacante = serviceVacantes.buscarPorId(idVacante);
+        model.addAttribute("vacante", vacante);
+       setGenericos(model);
+        return "vacantes/formVacante";
+    }
     @GetMapping("/view/{id}")
     public String verDetalle(@PathVariable("id") int idVacante, Model model) {
 
@@ -102,5 +108,10 @@ public class VacantesController {
         System.out.println("Vacante: " + vacante);
 
         return "detalle";
+    }
+    @ModelAttribute
+    public void setGenericos(Model model){
+        model.addAttribute("categorias", serviceCategorias.buscarTodas());
+
     }
 }

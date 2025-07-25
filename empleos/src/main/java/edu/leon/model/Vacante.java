@@ -124,7 +124,9 @@ public class Vacante {
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
-
+    public void reset(){
+        imagen = null;
+    }
     @Override
     public String toString() {
         return "Vacante{" +

@@ -4,12 +4,13 @@ import edu.leon.model.Categoria;
 import edu.leon.repositories.CategoriasRepository;
 import edu.leon.service.ICategoriasService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-//@Primary
+@Primary
 public class CategoriasServiceJpa implements ICategoriasService {
 
     @Autowired

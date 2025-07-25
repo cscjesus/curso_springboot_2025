@@ -3,6 +3,7 @@ package edu.leon.controller;
 import edu.leon.model.Perfil;
 import edu.leon.model.Usuario;
 import edu.leon.model.Vacante;
+import edu.leon.service.ICategoriasService;
 import edu.leon.service.IUsuariosService;
 import edu.leon.service.IVacanteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,8 @@ public class HomeController {
     private IVacanteService serviceVacantes;
     @Autowired
     private IUsuariosService serviceUsuarios;
-
+    @Autowired
+    private ICategoriasService serviceCategorias;
     @GetMapping("/tabla")
     public String mostrarTabla(Model model){
         List<Vacante> lista = serviceVacantes.buscarTodas();
@@ -82,11 +84,18 @@ public class HomeController {
 
         return "redirect:/usuarios/index";
     }
-
+    @GetMapping("/search")
+    public String buscar(@ModelAttribute("search") Vacante vacante){
+        System.out.println("Buscar: " + vacante);
+        return "home";
+    }
     @ModelAttribute
     public void setGenericos(Model model){
+        var vacanteSearch = new Vacante();
+        vacanteSearch.reset();
         model.addAttribute("vacantes", serviceVacantes.buscarDestacadas());
-
+        model.addAttribute("categorias", serviceCategorias.buscarTodas());
+        model.addAttribute("search", vacanteSearch);
     }
 
 }

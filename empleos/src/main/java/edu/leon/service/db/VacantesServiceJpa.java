@@ -5,6 +5,7 @@ import edu.leon.repositories.VacantesRepository;
 import edu.leon.service.IVacanteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,5 +37,10 @@ public class VacantesServiceJpa implements IVacanteService {
     @Override
     public void eliminar(Integer id) {
         vacantesRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Vacante> buscarByExample(Example<Vacante> example) {
+        return vacantesRepository.findAll(example);
     }
 }

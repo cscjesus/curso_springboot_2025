@@ -1,6 +1,7 @@
 package edu.leon.service;
 
 import edu.leon.model.Vacante;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -54,5 +55,10 @@ public class VacantesServiceImpl implements IVacanteService {
     @Override
     public void eliminar(Integer id) {
 
+    }
+
+    @Override
+    public List<Vacante> buscarByExample(Example<Vacante> example) {
+        return List.of();
     }
 }

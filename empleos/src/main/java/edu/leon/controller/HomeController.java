@@ -9,6 +9,7 @@ import edu.leon.service.IVacanteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -91,8 +92,12 @@ public class HomeController {
     @GetMapping("/search")
     public String buscar(@ModelAttribute("search") Vacante vacante,Model model) {
         System.out.println("Buscar: " + vacante);
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                //where descripcion like '%?%'
+                .withMatcher("descripcion",ExampleMatcher.GenericPropertyMatchers.contains()).withIgnoreCase();
 
-        Example<Vacante> example= Example.of(vacante);
+
+        Example<Vacante> example= Example.of(vacante, matcher);
         var lista = serviceVacantes.buscarByExample(example);
         model.addAttribute("vacantes",lista);
         return "home";

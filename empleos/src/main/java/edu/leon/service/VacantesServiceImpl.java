@@ -2,6 +2,8 @@ package edu.leon.service;
 
 import edu.leon.model.Vacante;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -60,5 +62,10 @@ public class VacantesServiceImpl implements IVacanteService {
     @Override
     public List<Vacante> buscarByExample(Example<Vacante> example) {
         return List.of();
+    }
+
+    @Override
+    public Page<Vacante> buscarTodas(Pageable pageable) {
+        return null;
     }
 }

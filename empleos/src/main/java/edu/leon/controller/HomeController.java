@@ -6,6 +6,7 @@ import edu.leon.model.Vacante;
 import edu.leon.service.ICategoriasService;
 import edu.leon.service.IUsuariosService;
 import edu.leon.service.IVacanteService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.data.domain.Example;
@@ -32,16 +33,17 @@ public class HomeController {
     private IUsuariosService serviceUsuarios;
     @Autowired
     private ICategoriasService serviceCategorias;
+
     @GetMapping("/tabla")
-    public String mostrarTabla(Model model){
+    public String mostrarTabla(Model model) {
         List<Vacante> lista = serviceVacantes.buscarTodas();
-        model.addAttribute("vacantes",lista);
+        model.addAttribute("vacantes", lista);
         return "tabla";
     }
 
     @GetMapping("/detalle")
     public String mostrarDetalle(Model model) {
-        Vacante vacante = new Vacante(0, "Ingeniero de Comunicaciones", "Se solicita Ing. para dar soporte a intranet", LocalDate.now(), 9700.0,0,"no-omage.png",null,null,
+        Vacante vacante = new Vacante(0, "Ingeniero de Comunicaciones", "Se solicita Ing. para dar soporte a intranet", LocalDate.now(), 9700.0, 0, "no-omage.png", null, null,
                 null);
         model.addAttribute("vacante", vacante);
         return "detalle";
@@ -90,33 +92,37 @@ public class HomeController {
 
         return "redirect:/usuarios/index";
     }
+
     @GetMapping("/search")
-    public String buscar(@ModelAttribute("search") Vacante vacante,Model model) {
+    public String buscar(@ModelAttribute("search") Vacante vacante, Model model) {
         System.out.println("Buscar: " + vacante);
         ExampleMatcher matcher = ExampleMatcher.matching()
                 //where descripcion like '%?%'
-                .withMatcher("descripcion",ExampleMatcher.GenericPropertyMatchers.contains()).withIgnoreCase();
+                .withMatcher("descripcion", ExampleMatcher.GenericPropertyMatchers.contains()).withIgnoreCase();
 
 
-        Example<Vacante> example= Example.of(vacante, matcher);
+        Example<Vacante> example = Example.of(vacante, matcher);
         var lista = serviceVacantes.buscarByExample(example);
-        model.addAttribute("vacantes",lista);
+        model.addAttribute("vacantes", lista);
         return "home";
     }
+
     @InitBinder
     public void initBinder(WebDataBinder binder) {
-        binder.registerCustomEditor(String.class,new StringTrimmerEditor(true));
+        binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
     }
+
     @ModelAttribute
-    public void setGenericos(Model model){
+    public void setGenericos(Model model) {
         var vacanteSearch = new Vacante();
         vacanteSearch.reset();
         model.addAttribute("vacantes", serviceVacantes.buscarDestacadas());
         model.addAttribute("categorias", serviceCategorias.buscarTodas());
         model.addAttribute("search", vacanteSearch);
     }
+
     @GetMapping("/index")
-    public String mostrarIndex(Authentication authentication) {
+    public String mostrarIndex(Authentication authentication, HttpSession session) {
         String username = authentication.getName();
         System.out.println("Usuario autenticado: " + username);
 
@@ -124,6 +130,13 @@ public class HomeController {
             System.out.println("Rol: " + auth.getAuthority());
         });
 
+        if(session.getAttribute("username") != null)
+            return "redirect:/";
+
+        Usuario usuario = serviceUsuarios.buscarPorUsername(username);
+        usuario.setPassword(null);
+        session.setAttribute("usuario", usuario);
+        System.out.println(usuario);
         return "redirect:/";
     }
 }

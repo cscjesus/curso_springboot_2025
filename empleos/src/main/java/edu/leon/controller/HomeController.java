@@ -119,6 +119,11 @@ public class HomeController {
     public String mostrarIndex(Authentication authentication) {
         String username = authentication.getName();
         System.out.println("Usuario autenticado: " + username);
+
+        authentication.getAuthorities().forEach(auth -> {
+            System.out.println("Rol: " + auth.getAuthority());
+        });
+
         return "redirect:/";
     }
 }

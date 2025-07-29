@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -114,5 +115,10 @@ public class HomeController {
         model.addAttribute("categorias", serviceCategorias.buscarTodas());
         model.addAttribute("search", vacanteSearch);
     }
-
+    @GetMapping("/index")
+    public String mostrarIndex(Authentication authentication) {
+        String username = authentication.getName();
+        System.out.println("Usuario autenticado: " + username);
+        return "redirect:/";
+    }
 }

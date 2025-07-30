@@ -33,6 +33,7 @@ public class HomeController {
     private ICategoriasService serviceCategorias;
     @Autowired
     private PasswordEncoder passwordEncoder;
+
     @GetMapping("/tabla")
     public String mostrarTabla(Model model) {
         List<Vacante> lista = serviceVacantes.buscarTodas();
@@ -133,7 +134,7 @@ public class HomeController {
             System.out.println("Rol: " + auth.getAuthority());
         });
 
-        if(session.getAttribute("username") != null)
+        if (session.getAttribute("username") != null)
             return "redirect:/";
 
         Usuario usuario = serviceUsuarios.buscarPorUsername(username);
@@ -142,14 +143,22 @@ public class HomeController {
         System.out.println(usuario);
         return "redirect:/";
     }
+
     @GetMapping("/bcrypt/{texto}")
     @ResponseBody
     public String encriptar(@PathVariable String texto) {
         String hashedPassword = passwordEncoder.encode(texto);
-        return  texto +" Encriptado:" + hashedPassword;
+        return texto + " Encriptado:" + hashedPassword;
     }
+
     @GetMapping("/login")
     public String mostrarLogin(Model model) {
         return "login";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate(); // Invalidar la sesión
+        return "redirect:/"; // Redirigir al formulario de login
     }
 }

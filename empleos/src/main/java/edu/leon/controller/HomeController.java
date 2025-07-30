@@ -148,4 +148,8 @@ public class HomeController {
         String hashedPassword = passwordEncoder.encode(texto);
         return  texto +" Encriptado:" + hashedPassword;
     }
+    @GetMapping("/login")
+    public String mostrarLogin(Model model) {
+        return "login";
+    }
 }

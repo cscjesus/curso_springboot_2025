@@ -51,7 +51,8 @@ public class DatabaseWebSecurity {
                         .anyRequest().authenticated());
 
         //el formulario de login no requiere autenticacion
-        http.formLogin(form -> form.permitAll());
+//        http.formLogin(form -> form.permitAll());//muestra el formulario de login por defecto
+        http.formLogin(form->form.loginPage("/login").permitAll());
         return http.build();
     }
     //para encriptar las contraseñas

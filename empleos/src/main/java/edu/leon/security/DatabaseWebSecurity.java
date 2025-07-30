@@ -42,7 +42,7 @@ public class DatabaseWebSecurity {
                         //recursos estaticos no requiren autenticacion
                         .requestMatchers("/bootstrap/**", "/images/**", "/tinymce/**", "/logos/**").permitAll()
                         //las vistas publicas no requieren autenticacion
-                        .requestMatchers("/", "/signup", "/search", "/vacantes/view/**").permitAll()
+                        .requestMatchers("/", "/signup", "/search", "/vacantes/view/**","/bcrypt/**").permitAll()
                         // acceso a url por roles;
                         .requestMatchers("/vacantes/**").hasAnyAuthority("ADMINISTRADOR", "SUPERVISOR")
                         .requestMatchers("/categorias/**").hasAnyAuthority("ADMINISTRADOR", "SUPERVISOR")

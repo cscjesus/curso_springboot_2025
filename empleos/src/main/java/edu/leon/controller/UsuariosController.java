@@ -35,11 +35,5 @@ public class UsuariosController {
         attributes.addFlashAttribute("msg", "El usuario fue eliminado!.");
         return "redirect:/usuarios/index";
     }
-    @GetMapping("/demo-bcrypt")
-    public String pruebaBcrypt() {
-        String parssword = "mari123";
-        String hashedPassword = passwordEncoder.encode(parssword);
-        System.out.println("Contraseña encriptada: " + hashedPassword);
-        return  "usuarios/demo";
-    }
+
 }

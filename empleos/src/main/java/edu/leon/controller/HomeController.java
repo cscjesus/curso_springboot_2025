@@ -16,10 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
@@ -144,5 +141,11 @@ public class HomeController {
         session.setAttribute("usuario", usuario);
         System.out.println(usuario);
         return "redirect:/";
+    }
+    @GetMapping("/bcrypt/{texto}")
+    @ResponseBody
+    public String encriptar(@PathVariable String texto) {
+        String hashedPassword = passwordEncoder.encode(texto);
+        return  texto +" Encriptado:" + hashedPassword;
     }
 }

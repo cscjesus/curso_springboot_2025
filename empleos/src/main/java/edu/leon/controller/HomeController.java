@@ -12,6 +12,7 @@ import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -33,7 +34,8 @@ public class HomeController {
     private IUsuariosService serviceUsuarios;
     @Autowired
     private ICategoriasService serviceCategorias;
-
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @GetMapping("/tabla")
     public String mostrarTabla(Model model) {
         List<Vacante> lista = serviceVacantes.buscarTodas();
@@ -75,6 +77,10 @@ public class HomeController {
 
     @PostMapping("/signup")
     public String guardarRegistro(Usuario usuario, RedirectAttributes attributes) {
+        String pwPlano = usuario.getPassword();
+        String pwEncriptado = passwordEncoder.encode(pwPlano);
+        System.out.println("Contraseña encriptada: " + pwEncriptado);
+        usuario.setPassword(pwEncriptado); // Guardamos la contraseña encriptada
         usuario.setEstatus(1); // Activado por defecto
         usuario.setFechaRegistro(LocalDate.now()); // Fecha de Registro, la fecha actual del servidor
 

@@ -1,7 +1,7 @@
 package edu.leon.controller;
 
 import edu.leon.model.Categoria;
-import edu.leon.service.ICategoriasService;
+import edu.leon.services.ICategoriasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;

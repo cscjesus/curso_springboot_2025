@@ -1,9 +1,9 @@
 package edu.leon.controller;
 
 import edu.leon.model.Vacante;
-import edu.leon.service.CategoriasServiceImpl;
-import edu.leon.service.ICategoriasService;
-import edu.leon.service.IVacanteService;
+import edu.leon.services.CategoriasServiceImpl;
+import edu.leon.services.ICategoriasService;
+import edu.leon.services.IVacanteService;
 import edu.leon.util.Utileria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

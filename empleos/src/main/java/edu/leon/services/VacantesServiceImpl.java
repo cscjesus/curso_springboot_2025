@@ -1,4 +1,4 @@
-package edu.leon.service;
+package edu.leon.services;
 
 import edu.leon.model.Vacante;
 import org.springframework.data.domain.Example;

@@ -1,8 +1,8 @@
-package edu.leon.service.db;
+package edu.leon.services.db;
 
 import edu.leon.model.Vacante;
 import edu.leon.repositories.VacantesRepository;
-import edu.leon.service.IVacanteService;
+import edu.leon.services.IVacanteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Example;

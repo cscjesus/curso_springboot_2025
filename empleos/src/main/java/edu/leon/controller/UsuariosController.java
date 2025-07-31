@@ -1,7 +1,7 @@
 package edu.leon.controller;
 
 import edu.leon.model.Usuario;
-import edu.leon.service.IUsuariosService;
+import edu.leon.services.IUsuariosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;

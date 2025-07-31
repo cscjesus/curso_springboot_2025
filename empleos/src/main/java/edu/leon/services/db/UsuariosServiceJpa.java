@@ -1,8 +1,8 @@
-package edu.leon.service.db;
+package edu.leon.services.db;
 
 import edu.leon.model.Usuario;
 import edu.leon.repositories.UsuariosRepository;
-import edu.leon.service.IUsuariosService;
+import edu.leon.services.IUsuariosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

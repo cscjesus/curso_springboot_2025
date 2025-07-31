@@ -1,6 +1,5 @@
-package edu.leon.service;
+package edu.leon.services;
 import edu.leon.model.Categoria;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.*;

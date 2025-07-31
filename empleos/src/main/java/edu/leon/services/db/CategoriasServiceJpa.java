@@ -1,8 +1,8 @@
-package edu.leon.service.db;
+package edu.leon.services.db;
 
 import edu.leon.model.Categoria;
 import edu.leon.repositories.CategoriasRepository;
-import edu.leon.service.ICategoriasService;
+import edu.leon.services.ICategoriasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;

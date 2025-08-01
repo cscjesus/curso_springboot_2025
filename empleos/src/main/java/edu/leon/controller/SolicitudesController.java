@@ -1,12 +1,15 @@
 package edu.leon.controller;
 
 import edu.leon.model.Solicitud;
+import edu.leon.model.Usuario;
 import edu.leon.model.Vacante;
+import edu.leon.services.IUsuariosService;
 import edu.leon.services.IVacanteService;
 import edu.leon.services.db.VacantesServiceJpa;
 import edu.leon.util.Utileria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,6 +26,8 @@ public class SolicitudesController {
     @Autowired
     IVacanteService vacantesService;
 
+    @Autowired
+    IUsuariosService usuariosService;
     @GetMapping("/create/{idVacante}")
     public String crear(Solicitud solicitud, @PathVariable Integer idVacante, Model model) {
         Vacante vacante = vacantesService.buscarPorId(idVacante);
@@ -33,7 +38,9 @@ public class SolicitudesController {
     }
 
     @PostMapping("/save")
-    public String guardar(Solicitud solicitud, BindingResult bindingResult, @RequestParam("archivoCV") MultipartFile multipart) {
+    public String guardar(Solicitud solicitud, BindingResult bindingResult, @RequestParam("archivoCV") MultipartFile multipart, Authentication authentication) {
+        String username = authentication.getName();
+
         if (bindingResult.hasErrors()) {
             System.out.println("Existen errores en el formulario");
             return "solicitudes/formSolicitud";
@@ -47,6 +54,8 @@ public class SolicitudesController {
                 System.out.println("Error al guardar el archivo");
             }
         }
+        Usuario usuario = usuariosService.buscarPorUsername(username);
+        solicitud.setUsuario(usuario);
         System.out.println("Solicitud: " + solicitud);
         return "redirect:/";
     }

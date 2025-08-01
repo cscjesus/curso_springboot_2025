@@ -28,6 +28,7 @@ public class Solicitud {
     }
 
     public Solicitud() {
+        fecha = LocalDate.now();
     }
 
     public Integer getId() {
@@ -60,6 +61,22 @@ public class Solicitud {
 
     public void setArchivo(String archivo) {
         this.archivo = archivo;
+    }
+
+    public Vacante getVacante() {
+        return vacante;
+    }
+
+    public void setVacante(Vacante vacante) {
+        this.vacante = vacante;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override

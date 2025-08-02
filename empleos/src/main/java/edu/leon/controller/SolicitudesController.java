@@ -3,6 +3,7 @@ package edu.leon.controller;
 import edu.leon.model.Solicitud;
 import edu.leon.model.Usuario;
 import edu.leon.model.Vacante;
+import edu.leon.services.ISolicitudesService;
 import edu.leon.services.IUsuariosService;
 import edu.leon.services.IVacanteService;
 import edu.leon.services.db.VacantesServiceJpa;
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/solicitudes")
@@ -28,6 +30,10 @@ public class SolicitudesController {
 
     @Autowired
     IUsuariosService usuariosService;
+
+    @Autowired
+    ISolicitudesService  solicitudesService;
+
     @GetMapping("/create/{idVacante}")
     public String crear(Solicitud solicitud, @PathVariable Integer idVacante, Model model) {
         Vacante vacante = vacantesService.buscarPorId(idVacante);
@@ -38,7 +44,7 @@ public class SolicitudesController {
     }
 
     @PostMapping("/save")
-    public String guardar(Solicitud solicitud, BindingResult bindingResult, @RequestParam("archivoCV") MultipartFile multipart, Authentication authentication) {
+    public String guardar(Solicitud solicitud, BindingResult bindingResult, @RequestParam("archivoCV") MultipartFile multipart, Authentication authentication, RedirectAttributes attributes) {
         String username = authentication.getName();
 
         if (bindingResult.hasErrors()) {
@@ -56,6 +62,9 @@ public class SolicitudesController {
         }
         Usuario usuario = usuariosService.buscarPorUsername(username);
         solicitud.setUsuario(usuario);
+
+        solicitudesService.guardar(solicitud);
+        attributes.addFlashAttribute("msg","Gracias por enviar tu CV");
         System.out.println("Solicitud: " + solicitud);
         return "redirect:/";
     }

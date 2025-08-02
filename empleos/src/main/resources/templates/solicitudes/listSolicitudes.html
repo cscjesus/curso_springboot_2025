@@ -51,7 +51,8 @@
                                title="Enviar correo electrónico al usuario."><i class="fas fa-envelope"
                                                                                 aria-hidden="true"></i></a>
                             <a href="#" class="btn btn-success btn-sm" role="button" title="Descargar Curriculm Vitae."><i
-                                    class="fas fa-download" aria-hidden="true"></i></a>
+                                    class="fas fa-download" aria-hidden="true"
+                            th:ref="@{/cv/{archivo} (archivo=${solicitud.archivo})}" target="_blank"></i></a>
                         </td>
                     </tr>
 

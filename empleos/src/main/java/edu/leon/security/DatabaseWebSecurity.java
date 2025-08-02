@@ -43,10 +43,13 @@ public class DatabaseWebSecurity {
                         .requestMatchers("/bootstrap/**", "/images/**", "/tinymce/**", "/logos/**").permitAll()
                         //las vistas publicas no requieren autenticacion
                         .requestMatchers("/", "/signup", "/search", "/vacantes/view/**","/bcrypt/**").permitAll()
+
                         // acceso a url por roles;
                         .requestMatchers("/vacantes/**").hasAnyAuthority("ADMINISTRADOR", "SUPERVISOR")
+                        .requestMatchers("/solicitudes/**").hasAnyAuthority("ADMINISTRADOR", "SUPERVISOR")
                         .requestMatchers("/categorias/**").hasAnyAuthority("ADMINISTRADOR", "SUPERVISOR")
                         .requestMatchers("/usuarios/**").hasAnyAuthority("ADMINISTRADOR")
+
                         //todas las demas vistas requieren autenticacion
                         .anyRequest().authenticated());
 

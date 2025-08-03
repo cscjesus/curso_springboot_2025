@@ -45,7 +45,9 @@ public class DatabaseWebSecurity {
                         .requestMatchers("/", "/signup", "/search", "/vacantes/view/**","/bcrypt/**").permitAll()
 
                         // acceso a url por roles;
+                        // el orde de las reglas es importante
                         .requestMatchers("/vacantes/**").hasAnyAuthority("ADMINISTRADOR", "SUPERVISOR")
+                        .requestMatchers("/solicitudes/create/**","/solicitudes/save/**").hasAnyAuthority("USUARIO")
                         .requestMatchers("/solicitudes/**").hasAnyAuthority("ADMINISTRADOR", "SUPERVISOR")
                         .requestMatchers("/categorias/**").hasAnyAuthority("ADMINISTRADOR", "SUPERVISOR")
                         .requestMatchers("/usuarios/**").hasAnyAuthority("ADMINISTRADOR")

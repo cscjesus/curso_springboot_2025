@@ -6,7 +6,6 @@ import edu.leon.model.Vacante;
 import edu.leon.services.ISolicitudesService;
 import edu.leon.services.IUsuariosService;
 import edu.leon.services.IVacanteService;
-import edu.leon.services.db.VacantesServiceJpa;
 import edu.leon.util.Utileria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -75,5 +74,11 @@ public class SolicitudesController {
         attributes.addFlashAttribute("msg","Gracias por enviar tu CV");
         System.out.println("Solicitud: " + solicitud);
         return "redirect:/";
+    }
+    @GetMapping("/delete/{id}")
+    public String eliminar(@PathVariable("id") Integer idSolicitud, RedirectAttributes attributes) {
+        solicitudesService.eliminar(idSolicitud);
+        attributes.addFlashAttribute("msg","La solicitud fue eliminada");
+        return "redirect:/solicitudes/indexPaginate";
     }
 }

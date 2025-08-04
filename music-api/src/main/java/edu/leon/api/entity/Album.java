@@ -25,12 +25,12 @@ public class Album {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTitulo(String title) {
+        this.titulo = title;
     }
 
     public Double getPrecio() {
@@ -61,7 +61,7 @@ public class Album {
     public String toString() {
         return "Album{" +
                 "id=" + id +
-                ", title='" + title + '\'' +
+                ", title='" + titulo + '\'' +
                 ", lanzado=" + lanzado +
                 ", genero='" + genero + '\'' +
                 ", precio=" + precio +

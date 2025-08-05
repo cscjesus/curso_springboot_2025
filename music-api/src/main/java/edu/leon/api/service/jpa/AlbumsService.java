@@ -17,4 +17,9 @@ public class AlbumsService implements IAlbumService {
     public List<Album> buscarTodos() {
         return albumsRepository.findAll();
     }
+
+    @Override
+    public void guardar(Album album) {
+        albumsRepository.save(album);
+    }
 }

@@ -4,9 +4,7 @@ package edu.leon.api.controller;
 import edu.leon.api.entity.Album;
 import edu.leon.api.service.IAlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,5 +17,10 @@ public class AlbumsController {
     @GetMapping("/albums")
     public List<Album> buscarTodos() {
         return albumService.buscarTodos();
+    }
+    @PostMapping("/albums")
+    public Album guardar(@RequestBody Album album) {
+        albumService.guardar(album);
+        return album;
     }
 }
